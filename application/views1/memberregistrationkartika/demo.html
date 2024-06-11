@@ -1,0 +1,22 @@
+public function getreportofmember()
+{
+    $deposite_id = $this->input->post('deposite_id');
+    $data['detailsdeposite'] = $this->MemberReport_model->getmemberreport($deposite_id);
+
+    foreach ($data['detailsdeposite'] as $rw => $value) {
+        echo "<tr>";
+        echo "<td>" . $value->deposite_id . "</td>";
+        echo "<td>" . $value->fullname . "</td>";
+        echo "<td>" . $value->address . "</td>";
+        echo "<td>" . $value->adharnumber . "</td>";
+        echo "<td>" . $value->mobilenumber . "</td>";
+        echo "<td>" . $value->duration_name . "</td>";
+        echo "<td>" . $value->start_date . "</td>";
+        echo "<td>" . $value->days_until_current_date . "</td>";
+        echo "<td>" . $value->totalamount . "</td>";
+
+        $i++;
+
+        echo "</tr>";
+    }
+}

@@ -1,0 +1,58 @@
+<script type="text/javascript">
+    function myfun(paravalue) {
+        var backup = document.body.innerHTML;
+        var printContent = document.getElementById(paravalue).outerHTML;
+
+        // Open a new window and set its content to the printable content
+        var printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>Print</title>');
+
+        // Copy styles from the main document to the new window
+        var styles = document.head.querySelectorAll('style, link[rel="stylesheet"]');
+        styles.forEach(function (style) {
+            printWindow.document.head.appendChild(style.cloneNode(true));
+        });
+
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        // Call the print function and close the new window
+        printWindow.print();
+        printWindow.close();
+
+        // Restore the original content
+        document.body.innerHTML = backup;
+    }
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+    function printData() {
+        var tableToPrint = document.getElementById("Storedata");
+        newWin = window.open("");
+        newWin.document.write('<html><head><title>Print</title>');
+        newWin.document.write('<style>');
+        newWin.document.write('body { font-family: Arial, sans-serif; }');
+        newWin.document.write('tr, th, td { border: 1px solid #dee2e6!important; padding: 8px!important; }');
+        newWin.document.write('table { border-top: 1px solid #dee2e6!important; border-bottom: 1px solid rgba(0, 0, 0, 0.3); border-collapse: collapse; width: 100%; }');
+        newWin.document.write('</style>');
+        newWin.document.write('</head><body>');
+        newWin.document.write(tableToPrint.outerHTML);
+        newWin.document.write('</body></html>');
+        newWin.print();
+        newWin.close();
+    }
+
+    $('#printbtn').on('click', function () {
+        printData();
+    });
+</script>
